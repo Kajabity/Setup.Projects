@@ -29,12 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apache-maven-3.0.5\" />
-    <Folder Include="CustomActions\" />
-    <Folder Include="CustomDialogs\" />
     <Folder Include="Fragments\" />
     <Folder Include="Includes\" />
-    <Folder Include="Lang\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="apache-maven-3.0.5\README.md" />

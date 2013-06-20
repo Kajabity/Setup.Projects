@@ -32,19 +32,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apache-maven-2.2.1\" />
-    <Folder Include="CustomDialogs\" />
     <Folder Include="Fragments\" />
     <Folder Include="Includes" />
-    <Folder Include="CustomActions" />
-    <Folder Include="Lang\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="apache-maven-2.2.1\README.md" />
     <Content Include="Includes\Maven2Variables.wxi" />
     <Content Include="LICENSE.rtf" />
     <Content Include="Maven2Url.txt" />
-    <Content Include="notes.txt" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>

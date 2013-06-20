@@ -10,6 +10,8 @@ The current version is specified in the .\Includes\Maven3Variables.wxi.
 To build the project you will need to download and extract Apache Maven 3.0.5 into a
 .\apache-maven-3.0.5\ folder - from http://maven.apache.org/download.cgi
 
+Visit http://www.kajabity.com/category/apache-maven/ to find out more.
+
 Change Log
 ==========
 
