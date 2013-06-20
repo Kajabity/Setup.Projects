@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2012-13 Williams Technologies Limtied.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    Kajbity is a trademark of Williams Technologies Limited.
+
+    http://www.kajabity.com
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Includes\Maven2Variables.wxi ?>
+
+  <!-- The product - no GUID so all updates are Major Upgrades. -->
+  <Product Id="*"
+           Name="$(var.ProductName)"
+           Language="1033"
+           Version="$(var.ProductVersion)"
+           Manufacturer="$(var.Manufacturer)"
+           UpgradeCode="$(var.UpgradeGuid)">
+
+    <Package Description="$(var.ProductName) $(var.ProductVersion) Installer for Microsoft Windows"
+		         Comments="Created by Williams Technologies Limited"
+             InstallerVersion="200"
+             Compressed="yes"
+             Manufacturer="$(var.Manufacturer)" />
+
+    <MajorUpgrade
+      Schedule="afterInstallFinalize"
+      DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."/>
+
+    <!--
+			Source media for the installation. 
+ 			Specifies a single cab file to be embedded in the installer's .msi. 
+		-->
+    <Media Id="1" Cabinet="Maven2.cab" EmbedCab="yes" CompressionLevel="high"/>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="CompanyDir" Name="$(var.Manufacturer)">
+          <Directory Id="INSTALLDIR" Name="$(var.Maven2FilesDir)"/>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ShortCutDir" Name="$(var.ProductName)"/>
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="INSTALLDIR">
+
+      <Component Id="ShortcutComponent" Guid="{FECD093C-6F0D-4581-BF84-85A27175F382}">
+
+        <File Id="Maven2Url.txt"
+              Name="Maven2.url"
+              Vital="yes"
+              KeyPath="yes"
+              Source="Maven2Url.txt">
+
+          <Shortcut Id="MavenWebsiteShortcut"
+                    Directory="ShortCutDir"
+                    Advertise="yes"
+                    Name="Apache Maven Website"
+                    WorkingDirectory="INSTALLDIR">
+
+          </Shortcut>
+
+        </File>
+
+      </Component>
+
+      <Component Id="EnvironmentComponent" Guid="{4B3D82B9-6874-4C36-8968-086B9FF60966}">
+
+        <Shortcut Id="UninstallProduct"
+                  Directory="ShortCutDir"
+                  Name="Uninstall $(var.ProductName)"
+                  Target="[SystemFolder]msiexec.exe"
+                  Arguments="/x [ProductCode]"
+                  Description="Uninstalls $(var.ProductName)" />
+
+        <RemoveFolder Id="DeleteShortcutFolder"
+                       Directory="ShortCutDir"
+                       On="uninstall"/>
+
+        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.Maven2FilesDir)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+
+        <Environment Id="M2_HOME"
+                     Action="create"
+                     Name="M2_HOME"
+                     Permanent="no"
+                     System="no"
+                     Value="[INSTALLDIR]" />
+
+        <Environment Id="M2"
+                     Action="create"
+                     Name="M2"
+                     Permanent="no"
+                     System="no"
+                     Value="%M2_HOME%bin" />
+
+        <Environment Id="MAVEN_OPTS"
+                     Action="create"
+                     Name="MAVEN_OPTS"
+                     Permanent="no"
+                     System="no"/>
+
+        <Environment Id="Path"
+                     Action="set"
+                     Part="last"
+                     Name="Path"
+                     Permanent="no"
+                     System="no"
+                     Value="%M2%" />
+
+      </Component>
+
+    </DirectoryRef>
+
+    <Feature Id="ProductFeature" Title="Maven2.Setup" Level="1">
+
+      <ComponentRef Id="ShortcutComponent"/>
+
+      <ComponentRef Id="EnvironmentComponent"/>
+
+      <ComponentGroupRef Id="Maven2FilesGroup"/>
+
+      <!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. 
+      -->
+      <ComponentGroupRef Id="Product.Generated" />
+
+    </Feature>
+
+    <!--
+			Using the Wix UI library
+ 
+			WixUI_InstallDir does not allow the user to choose 
+			features but adds a dialog to let the user choose a 
+			directory where the product will be installed
+		-->
+    <Property Id="WIXUI_INSTALLDIR">INSTALLDIR</Property>
+    <UIRef Id="WixUI_InstallDir"/>
+
+    <!--
+			See http://msdn.microsoft.com/en-us/library/aa371865.aspx
+			Attempts to make the installation avaialble to all users.
+		-->
+    <Property Id="ALLUSERS">2</Property>
+
+    <!-- Use an RTF copy of the Apache 2.0 licence (text version won't display). -->
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)LICENSE.rtf" />
+  </Product>
+</Wix>

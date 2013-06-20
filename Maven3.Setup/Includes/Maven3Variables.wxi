@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define ProductVersion = "3.0.5"?>
+  <?define ProductName = "Apache Maven 3"?>
+  <?define Manufacturer = "Apache Software Foundation"?>
+  
+  <!--
+    This is the same GUID for all of the Maven * setup projects 
+    so that installing a newer version will replace the older version. 
+  -->
+  <?define UpgradeGuid = "{9044E7EA-6098-40F8-B03F-9637FEE8EBCE}"?>
+</Include>

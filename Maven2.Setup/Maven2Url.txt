@@ -1,0 +1,2 @@
+﻿[InternetShortcut]
+URL=http://maven.apache.org/
