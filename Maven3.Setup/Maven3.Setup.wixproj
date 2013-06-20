@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>3.5</ProductVersion>
-    <ProjectGuid>{7e71e98f-3306-49ca-bee2-415711b3a1f8}</ProjectGuid>
+    <ProductVersion>3.6</ProductVersion>
+    <ProjectGuid>44bfb053-533f-41c7-851c-e3fd897d48ce</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>apache-maven-2.2.1</OutputName>
+    <OutputName>apache-maven-3.0.5</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -15,36 +15,32 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;Maven2FilesDir=apache-maven-2.2.1</DefineConstants>
+    <DefineConstants>Debug;Maven3FilesDir=apache-maven-3.0.5</DefineConstants>
     <WixVariables>
     </WixVariables>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Maven2FilesDir=apache-maven-2.2.1</DefineConstants>
-    <WixVariables>
-    </WixVariables>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Fragments\Maven2FilesFragment.wxs" />
-    <Compile Include="Maven2.wxs" />
+    <Compile Include="Fragments\Maven3FilesFragment.wxs" />
+    <Compile Include="Maven3.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="apache-maven-2.2.1\" />
+    <Folder Include="apache-maven-3.0.5\" />
+    <Folder Include="CustomActions\" />
     <Folder Include="CustomDialogs\" />
     <Folder Include="Fragments\" />
-    <Folder Include="Includes" />
-    <Folder Include="CustomActions" />
+    <Folder Include="Includes\" />
     <Folder Include="Lang\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="apache-maven-2.2.1\README.md" />
-    <Content Include="Includes\Maven2Variables.wxi" />
+    <Content Include="apache-maven-3.0.5\README.md" />
+    <Content Include="Includes\Maven3Variables.wxi" />
     <Content Include="LICENSE.rtf" />
-    <Content Include="Maven2Url.txt" />
-    <Content Include="notes.txt" />
+    <Content Include="Maven3Url.txt" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +51,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(ProjectDir)$(TargetName)" -cg Maven2FilesGroup -gg -scom -sreg -sfrag -srd -var var.Maven2FilesDir -dr INSTALLDIR -out "$(ProjectDir)Fragments\Maven2FilesFragment.wxs"</PreBuildEvent>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(ProjectDir)$(TargetName)" -cg Maven3FilesGroup -gg -scom -sreg -sfrag -srd -var var.Maven3FilesDir -dr INSTALLDIR -out "$(ProjectDir)Fragments\Maven3FilesFragment.wxs"</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

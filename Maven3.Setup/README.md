@@ -10,17 +10,62 @@ The current version is specified in the .\Includes\Maven3Variables.wxi.
 To build the project you will need to download and extract Apache Maven 3.0.5 into a
 .\apache-maven-3.0.5\ folder - from http://maven.apache.org/download.cgi
 
-Files and Folders
-=================
+Included Files and Folders
+==========================
 
 .\apache-maven-3.0.5\
 
-	Download and extract a copy of Apache Maven 3.0.5 into this folder.
+	Download and extract a copy of Apache Maven 3.0.5 into this folder.  See the README.md in that folder for details.
 
-bin
+.\Includes\
+
+	Holds include files for the project.  The Maven3Variables.wxi file is here and contains details such as the 
+	product name, version number and Upgrade GUID.
+
+.\LICENSE.rtf
+
+	A copy of the Apache 2.0 License for inclusion in the Installer.
+
+.\Maven3.Setup.wixproj
+
+	The Microsoft Visual Studio 2012 project file.
+
+.\Maven3.wxs
+
+	This is the main WiX source file for the Apache Maven 3 installer.
+
+.\Maven3URL.txt
+
+	This file contains a URL in a form that can be used by the WiX installer to create a Start Menu link 
+	to the Apache Maven web site.
+
+Other Files and Folders
+=======================
+
+The following files or folders are not included in the GitHub distribution but may be created in later
+versions or by the build process.
+
+.\bin\
 
 	The output directory where the installer and associated files will be placed.
 
-CustomActions, CustomDialogs, Lang
+.\obj\
+
+	The output directory where intermediate build files are placed.
+
+.\CustomActions\, .\CustomDialogs\, .\Lang\, .\Resources\
 
 	Directories provided by the project template which I haven't yet used.
+
+.\Dist\
+
+	Somewhere to collect successful builds of the project - ready for distribution.
+
+.\Fragments\
+
+	The build process will capture the Apache Maven 3 files in a WiX fragment file, 
+	Maven3FilesFragment.wxi, in this directory
+
+.\Maven3.Setup.wixproj.user
+
+	Created when you load the project into Visual Studio to hold user specific settings and passwords.
