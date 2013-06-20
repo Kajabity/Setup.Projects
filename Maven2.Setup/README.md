@@ -12,14 +12,16 @@ To build the project you will need to download and extract Apache Maven 2.2.1 in
 
 Change Log
 ==========
+
 09-JAN-2013
 
 	Original version of the installer published on the Kajabity.com blog in binary form only.
 
 12-JUN-2013
 
-	
-
+	Added Java version checking.
+	Added README.md files.
+	First uploaded to GitHub.
 
 Included Files and Folders
 ==========================

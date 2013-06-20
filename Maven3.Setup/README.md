@@ -10,6 +10,16 @@ The current version is specified in the .\Includes\Maven3Variables.wxi.
 To build the project you will need to download and extract Apache Maven 3.0.5 into a
 .\apache-maven-3.0.5\ folder - from http://maven.apache.org/download.cgi
 
+Change Log
+==========
+
+12-JUN-2013
+
+	Created Apache Maven 3 installer based on Apache Maven 2 installer.
+	Included Java version checking.
+	Added README.md files.
+	First uploaded to GitHub.
+
 Included Files and Folders
 ==========================
 
