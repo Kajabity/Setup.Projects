@@ -22,6 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Maven3FilesDir=apache-maven-3.0.5</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Fragments\Maven3FilesFragment.wxs" />

@@ -127,13 +127,16 @@
     </DirectoryRef>
 
 
+    <!-- Check that a JRE version >= 1.5 is installed.  -->
     <Property Id="JAVA_CURRENT_VERSION">
-      <RegistrySearch Id="JRE_KEY" Root="HKLM" Key="SOFTWARE\JavaSoft\Java Runtime Environment" Name="EVersion" Type="raw"  />
+      <RegistrySearch Id="JRE_KEY" Root="HKLM" Key="SOFTWARE\JavaSoft\Java Runtime Environment" Name="CurrentVersion" Type="raw"  />
     </Property>
 
     <Condition Message="Java not installed  Please install JRE 1.5 or later."><![CDATA[(Installed OR JAVA_CURRENT_VERSION) AND JAVA_CURRENT_VERSION >= "1.5"]]></Condition>   
-
+     
+    <!--  Note that the Java Development Kit key could also have been checked as a JDK is required for Apache Maven.  -->
   
+    
   <Feature Id="ProductFeature" Title="Maven3.Setup" Level="1">
 
       <ComponentRef Id="ShortcutComponent"/>
