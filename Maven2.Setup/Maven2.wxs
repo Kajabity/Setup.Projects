@@ -45,6 +45,21 @@
 		-->
     <Media Id="1" Cabinet="Maven2.cab" EmbedCab="yes" CompressionLevel="high"/>
 
+    <!-- Include the Custom Actions library - currently just to send notification of Environment changes. -->
+    <Binary Id="SetupCustomActionsCPP.dll" SourceFile="..\SetupCustomActionsCPP\bin\$(var.Configuration)\SetupCustomActionsCPP.dll" />
+
+    <!-- Define the custom action to Refresh Environment Variables. -->
+    <CustomAction Id="RefreshEnvironmentVariables"
+                Return="check"
+                Execute="immediate"
+                BinaryKey="SetupCustomActionsCPP.dll"
+                DllEntry="RefreshEnvironmentVariables" />
+
+    <!-- Now schedule the custom action to happen after InstallFinalize. -->
+    <InstallExecuteSequence>
+      <Custom Action="RefreshEnvironmentVariables" After="InstallFinalize"/>
+    </InstallExecuteSequence>
+
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="CompanyDir" Name="$(var.Manufacturer)">
@@ -94,6 +109,9 @@
 
         <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.Maven2FilesDir)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
 
+        <!-- Setup environment variables - see instructions at the end of http://maven.apache.org/download.cgi -->
+
+        <!-- The home directory where Maven is installed. -->
         <Environment Id="M2_HOME"
                      Action="create"
                      Name="M2_HOME"
@@ -101,26 +119,30 @@
                      System="no"
                      Value="[INSTALLDIR]" />
 
+        <!-- The "bin" directory which is where the Maven command line tools are. -->
         <Environment Id="M2"
                      Action="create"
                      Name="M2"
                      Permanent="no"
                      System="no"
-                     Value="%M2_HOME%bin" />
+                     Value="[INSTALLDIR]bin" />
 
+        <!-- An optional environment variable that may be used to provide settings to Maven. -->
         <Environment Id="MAVEN_OPTS"
                      Action="create"
                      Name="MAVEN_OPTS"
                      Permanent="no"
                      System="no"/>
 
+        <!-- Finally, add the bin directory to the path.  Explicit as %M2% doesn't appear 
+        to expand properly when using WM_SETTINGCHANGE. -->
         <Environment Id="Path"
                      Action="set"
                      Part="last"
-                     Name="Path"
+                     Name="PATH"
                      Permanent="no"
                      System="no"
-                     Value="%M2%" />
+                     Value="[INSTALLDIR]bin" />
 
       </Component>
 

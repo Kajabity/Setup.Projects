@@ -48,6 +48,16 @@
       <Name>WixUIExtension</Name>
     </WixExtension>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SetupCustomActionsCPP\SetupCustomActionsCPP.vcxproj">
+      <Name>SetupCustomActionsCPP</Name>
+      <Project>{98077a04-de5a-4a2c-8f06-7d0815683002}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
     <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(ProjectDir)$(TargetName)" -cg Maven2FilesGroup -gg -scom -sreg -sfrag -srd -var var.Maven2FilesDir -dr INSTALLDIR -out "$(ProjectDir)Fragments\Maven2FilesFragment.wxs"</PreBuildEvent>
