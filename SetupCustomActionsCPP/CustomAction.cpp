@@ -31,8 +31,11 @@ UINT __stdcall RefreshEnvironmentVariables(MSIHANDLE hInstall)
 
 	WcaLog(LOGMSG_STANDARD, "Initialized.");
 
-	// TODO: Add your custom action code here.
-	SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)"Environment", SMTO_ABORTIFHUNG, 15000, NULL);
+	// Send out the Settings Changed message - Once using ANSII...
+	SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)"Environment", SMTO_ABORTIFHUNG, 5000, NULL);
+
+	// ...and once using UniCode (because Windows 8 likes it that way).
+	SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)L"Environment", SMTO_ABORTIFHUNG, 5000, NULL);
 
 LExit:
 	er = SUCCEEDED(hr) ? ERROR_SUCCESS : ERROR_INSTALL_FAILURE;

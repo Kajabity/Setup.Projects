@@ -107,7 +107,8 @@
                        Directory="ShortCutDir"
                        On="uninstall"/>
 
-        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.Maven3FilesDir)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.Maven3FilesDir)" 
+                       Name="installed" Type="integer" Value="1" KeyPath="yes"/>
 
         <!-- Setup environment variables - see instructions at the end of http://maven.apache.org/download.cgi -->
         
