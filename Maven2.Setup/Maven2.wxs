@@ -112,23 +112,26 @@
 
         <!-- Setup environment variables - see instructions at the end of http://maven.apache.org/download.cgi -->
 
-        <!-- The home directory where Maven is installed. -->
+        <!-- The home directory where Maven is installed. Set this to override anything already 
+             there - such as values for an older version.  -->
         <Environment Id="M2_HOME"
-                     Action="create"
+                     Action="set"
                      Name="M2_HOME"
                      Permanent="no"
                      System="no"
                      Value="[INSTALLDIR]" />
 
-        <!-- The "bin" directory which is where the Maven command line tools are. -->
+        <!-- The "bin" directory which is where the Maven command line tools are.  Set this to 
+             override anything already there - such as values for an older version. -->
         <Environment Id="M2"
-                     Action="create"
+                     Action="set"
                      Name="M2"
                      Permanent="no"
                      System="no"
                      Value="[INSTALLDIR]bin" />
 
-        <!-- An optional environment variable that may be used to provide settings to Maven. -->
+        <!-- An optional environment variable that may be used to provide settings to Maven. Create only
+             so that if anything is already there it is kept - it is not version specific.  -->
         <Environment Id="MAVEN_OPTS"
                      Action="create"
                      Name="MAVEN_OPTS"

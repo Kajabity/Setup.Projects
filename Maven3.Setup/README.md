@@ -22,6 +22,13 @@ Change Log
 	Added README.md files.
 	First uploaded to GitHub.
 
+27-SEP-2013
+
+    Added a custom action (C++ and a C# version I've deleted) to broadcast a WM_SETTINGCHANGE
+	to tell Windows programs the Environment variables have changed.
+	Soon after added modified to add both ANSII and Unicode to support Win 8.
+	Changed to use "set" instead of "create" to force update of M2_HOME and M2.
+
 Included Files and Folders
 ==========================
 
